@@ -1,4 +1,5 @@
 const express = require('express')
+// create a router instance
 const router = express.Router()
 // import your controller functions
 const termsController = require('../controllers/termsController')
