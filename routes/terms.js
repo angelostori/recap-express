@@ -1,31 +1,22 @@
 const express = require('express')
 const router = express.Router()
+// import your controller functions
+const termsController = require('../controllers/termsController')
 
 // index
-router.get('/', (req, res) => {
-    res.send('Show all terms here')
-})
+router.get('/', termsController.index)
 
 // show
-router.get('/:id', (req, res) => {
-    res.send('Show terms id ' + req.params.id)
-})
+router.get('/:id', termsController.show)
 
 // store
-router.post('/:id', (req, res) => {
-    console.log(req.body);
-    res.send('Store terms')
-})
+router.post('/', termsController.store)
 
 //update
-router.put('/:id', (req, res) => {
-    res.send('Update terms id ' + req.params.id)
-})
+router.put('/:id', termsController.update)
 
 // destroy
-router.delete('/:id', (req, res) => {
-    res.send('Destroy terms id ' + req.params.id)
-})
+router.delete('/:id', termsController.destroy)
 
 // export your router instance
 module.exports = router
