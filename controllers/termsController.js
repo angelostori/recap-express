@@ -56,11 +56,56 @@ const store = (req, res) => {
 }
 
 const update = (req, res) => {
-    res.send('Update terms id ' + req.params.id)
+    // get the param and convert it to a number
+    const id = Number(req.params.id)
+    //console.log(req.params.id, typeof req.params.id);
+    console.log(id);
+
+    // find the obj with the given id
+    const foundTerm = terms.find(term => Number(term.id) === id)
+    console.log(foundTerm);
+
+    // if the obj is undefined return a json 404 message
+    if (!foundTerm) {
+        return res.status(404).json({
+            error: true,
+            message: "Could not find the resource, 404 not found"
+        })
+    }
+
+    const { term, definition } = req.body
+
+    // update the found obj properties
+    foundTerm.term = term
+    foundTerm.definition = definition
+
+    console.log(foundTerm);
+    res.json(foundTerm)
 }
 
 const destroy = (req, res) => {
-    res.send('Delete terms id ' + req.params.id)
+    // get the param and convert it to a number
+    const id = Number(req.params.id)
+    //console.log(req.params.id, typeof req.params.id);
+    console.log(id);
+
+    // find the obj with the given id
+    const foundTerm = terms.find(term => Number(term.id) === id)
+    console.log(foundTerm);
+
+    // if the obj is undefined return a json 404 message
+    if (!foundTerm) {
+        return res.status(404).json({
+            error: true,
+            message: "Could not find the resource, 404 not found"
+        })
+    }
+
+    terms.splice(terms.indexOf(foundTerm), 1)
+
+    console.log(terms);
+
+    res.sendStatus(204)
 }
 
 module.exports = {

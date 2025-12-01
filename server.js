@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const PORT = 3000
 const termsRouter = require('./routes/terms')
+const notFound = require('./middlewares/notFound')
+const serverError = require('./middlewares/serverError')
 
 // register the body parser
 app.use(express.static('public'))
@@ -21,3 +23,6 @@ app.get('/', (req, res) => {
 
 // register your terms router on a specific path
 app.use('/api/terms', termsRouter) // localhost:3000/api/terms
+
+app.use(notFound)
+app.use(serverError)    
